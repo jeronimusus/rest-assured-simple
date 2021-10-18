@@ -1,21 +1,19 @@
-package functionality;
+package functionality.endpoints;
 
 import io.restassured.specification.RequestSpecification;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import static functionality.SetupEnvironment.buildEnv;
 
 public class Auth extends EndpointSuper {
+    private String accessToken;
     // Constructor without the required query param
     public Auth() {
         System.out.println("In Auth endpoint to get an access-token");
         requestSpec = buildEnv();
         addAdditionalRequestSpecs(requestSpec, constructRequestBody("test", "test"));
         postPayload("/api/auth");
+        setAccessToken();
     }
     private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){
         requestSpec.
@@ -28,5 +26,12 @@ public class Auth extends EndpointSuper {
         credentials.put("password", password);
         credentials.put("username", username);
         return credentials.toJSONString();
+    }
+    private String setAccessToken(){
+        accessToken = getPayloadJson().get("access_token");
+        return accessToken;
+    }
+    public String getAccessToken(){
+        return this.accessToken;
     }
 }

@@ -1,7 +1,6 @@
-package functionality;
+package functionality.endpoints;
 
-import io.restassured.specification.RequestSpecification;
-import org.json.simple.JSONObject;
+import functionality.endpoints.EndpointSuper;
 
 import static functionality.SetupEnvironment.buildEnv;
 
