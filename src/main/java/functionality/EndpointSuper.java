@@ -7,7 +7,7 @@ import io.restassured.specification.RequestSpecification;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static Functionality.ResponseSpecs.getCommonResponseSpec;
+import static functionality.ResponseSpecs.getCommonResponseSpec;
 import static io.restassured.RestAssured.given;
 
 public class EndpointSuper {
