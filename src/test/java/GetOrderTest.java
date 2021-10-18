@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class GetOrderTest {
     @Test
-    public void pgetAnOrder(){
+    public void getAnOrder(){
         GetOrder order = new GetOrder();
         order.writePayload();
     }

@@ -41,6 +41,16 @@ public class EndpointSuper {
 //        payload.then().body(); // Can be used to validate response?
         payloadJson = new JsonPath(payload.asString());
     }
+    public void deletePayload(String url){
+        payload = given().
+//                  filter(validationFilter).
+        spec(requestSpec).
+//                    log().all().
+        when().
+                delete(url); // can't do anymore method chaining as payload needs a Response returned to it
+//        payload.then().body(); // Can be used to validate response?
+        payloadJson = new JsonPath(payload.asString());
+    }
     public JsonPath getPayloadJson (){
         return this.payloadJson;
     }
