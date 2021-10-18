@@ -1,5 +1,6 @@
 package functionality.endpoints;
 
+import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -16,14 +17,12 @@ public class EndpointSuper {
     private JsonPath payloadJson = null;
     private Boolean getCommonResponseSpec = false;
     // Following is used for Swagger validation
-//    private static final String AWS_SWAGGER_YAML = "aws_swagger.yaml";
-//    private static final String AWS_SWAGGER_YAML = "aws_swagger.json";
-//    private static final String AWS_SWAGGER_YAML = "AWS_OPenAPI_3.yaml";
-//    private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(AWS_SWAGGER_YAML);;
+    private static final String AWS_SWAGGER_YAML = "pizza_swagger.yaml";
+    private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(AWS_SWAGGER_YAML);;
     public void getPayload(String url){
         requestSpec.log().everything(false);
         payload  = given().
-//                      filter(validationFilter).
+                      filter(validationFilter).
                         spec(requestSpec).
 //                        log().all(). // there are diff kinds of logging available
                     when().
@@ -33,7 +32,7 @@ public class EndpointSuper {
     }
     public void postPayload(String url){
         payload = given().
-//                  filter(validationFilter).
+                  filter(validationFilter).
                     spec(requestSpec).
 //                    log().all().
                 when().
@@ -43,7 +42,7 @@ public class EndpointSuper {
     }
     public void deletePayload(String url){
         payload = given().
-//                  filter(validationFilter).
+                  filter(validationFilter).
         spec(requestSpec).
 //                    log().all().
         when().
