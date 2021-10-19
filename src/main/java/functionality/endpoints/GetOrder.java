@@ -11,5 +11,4 @@ public class GetOrder extends EndpointSuper {
         requestSpec = buildEnv();
         getPayload("/api/orders");
     }
-
 }
