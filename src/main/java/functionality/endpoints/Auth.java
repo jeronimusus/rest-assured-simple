@@ -27,10 +27,7 @@ public class Auth extends EndpointSuper {
         credentials.put("username", username);
         return credentials.toJSONString();
     }
-    private String setAccessToken(){
-        accessToken = getPayloadJson().get("access_token");
-        return accessToken;
-    }
+    private void setAccessToken(){accessToken = getPayloadJson().get("access_token");}
     public String getAccessToken(){
         return this.accessToken;
     }

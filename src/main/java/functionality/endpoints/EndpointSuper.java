@@ -26,7 +26,7 @@ public class EndpointSuper {
                         spec(requestSpec).
 //                        log().all(). // there are diff kinds of logging available
                     when().
-                        get(url); // can't do anymore method chaining as payload needs a Response returned to it
+                        get(url); // can't do any more method chaining as payload needs a Response returned to it
         payloadJson = new JsonPath(payload.asString());
         runCommonResponseSpec();
     }
@@ -36,7 +36,7 @@ public class EndpointSuper {
                     spec(requestSpec).
 //                    log().all().
                 when().
-                    post(url); // can't do anymore method chaining as payload needs a Response returned to it
+                    post(url);
 //        payload.then().body(); // Can be used to validate response?
         payloadJson = new JsonPath(payload.asString());
     }
@@ -46,7 +46,7 @@ public class EndpointSuper {
         spec(requestSpec).
 //                    log().all().
         when().
-                delete(url); // can't do anymore method chaining as payload needs a Response returned to it
+                delete(url);
 //        payload.then().body(); // Can be used to validate response?
         payloadJson = new JsonPath(payload.asString());
     }

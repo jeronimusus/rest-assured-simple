@@ -28,13 +28,16 @@ paths:
                   description: username of user
         required: true
       responses:
-        201:
+        200:
           description: Successfully created token
           content:
             application/json:
               schema:
                 type: object
-      x-codegen-request-body-name: auth
+                properties:
+                  access_token:
+                    type: string
+                    description: Token used for authorisation
   /orders:
     get:
       tags:
@@ -103,7 +106,25 @@ paths:
             application/json:
               schema:
                 type: object
-      x-codegen-request-body-name: order
+                properties:
+                  Crust:
+                    type: string
+                    description: Crust for the pizza
+                  Flavor:
+                    type: string
+                    description: Flavor of the pizza
+                  Order_ID:
+                    type: integer
+                    description: Order number
+                  Size:
+                    type: string
+                    description: Size of the pizza
+                  Table_No:
+                    type: integer
+                    description: Customer's table number
+                  Timestamp:
+                    type: string
+                    description: Timestamp of when the order was made
   /orders/{Order_ID}:
     delete:
       tags:
