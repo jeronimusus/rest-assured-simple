@@ -10,6 +10,5 @@ public class GetOrderTest {
     public void getAnOrder(){
         GetOrder order = new GetOrder();
         order.writePayload();
-
     }
 }

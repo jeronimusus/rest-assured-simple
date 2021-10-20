@@ -1,6 +1,7 @@
 package functionality.endpoints;
 
 import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -22,7 +23,8 @@ public class EndpointSuper {
     public void getPayload(String url){
         requestSpec.log().everything(false);
         payload  = given().
-                      filter(validationFilter).
+                        filter(validationFilter).
+                        filter(new AllureRestAssured()).
                         spec(requestSpec).
 //                        log().all(). // there are diff kinds of logging available
                     when().
@@ -32,22 +34,22 @@ public class EndpointSuper {
     }
     public void postPayload(String url){
         payload = given().
-                  filter(validationFilter).
+                    filter(validationFilter).
+                    filter(new AllureRestAssured()).
                     spec(requestSpec).
 //                    log().all().
                 when().
                     post(url);
-//        payload.then().body(); // Can be used to validate response?
         payloadJson = new JsonPath(payload.asString());
     }
     public void deletePayload(String url){
         payload = given().
-                  filter(validationFilter).
-        spec(requestSpec).
+                    filter(validationFilter).
+                    filter(new AllureRestAssured()).
+                    spec(requestSpec).
 //                    log().all().
-        when().
-                delete(url);
-//        payload.then().body(); // Can be used to validate response?
+                when().
+                    delete(url);
         payloadJson = new JsonPath(payload.asString());
     }
     public JsonPath getPayloadJson (){

@@ -13,6 +13,13 @@
         <restassured.version>4.3.3</restassured.version>
         <junit.version>4.13.2</junit.version>
         <request.validator.version>2.20.0</request.validator.version>
+        <allure.junit4.version>2.14.0</allure.junit4.version>
+        <allure.rest-assured.version>2.14.0</allure.rest-assured.version>
+        <jackson.version>2.12.3</jackson.version>
+        <json.version>20210307</json.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <maven-surefire-plugin-version>3.0.0-M5</maven-surefire-plugin-version>
+        <allure.maven.version>2.10.0</allure.maven.version>
     </properties>
     <dependencies>
         <!--        https://bitbucket.org/atlassian/swagger-request-validator/src/master/-->
@@ -40,20 +47,17 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <!--            <scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.1</version>
-            <!--            <scope>test</scope>-->
         </dependency>
         <!--        Used to data drive junit-->
         <dependency>
             <groupId>com.tngtech.java</groupId>
             <artifactId>junit-dataprovider</artifactId>
             <version>1.13.1</version>
-            <!--            <scope>test</scope>-->
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
@@ -67,6 +71,30 @@
             <artifactId>JUnitParams</artifactId>
             <version>1.1.0</version>
         </dependency>
+        <!--Allure Reporting Dependency-->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>${allure.junit4.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Jackson Dependency -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- JSON Dependency -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -79,6 +107,38 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin-version}</version>
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven.version}</version>
+                <configuration>
+                    <reportVersion>2.4.1</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
