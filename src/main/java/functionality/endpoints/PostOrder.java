@@ -19,7 +19,8 @@ public class PostOrder extends EndpointSuper {
         Auth authentication = new Auth();
         requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
         addAdditionalRequestSpecs(requestSpec, constructRequestBody("crusty crust", "flavoursome flavour", "sizeable size", 5));
-        postPayload("/api/orders");
+        url = "/api/orders";
+        postPayload();
         setAllSetters();
     }
     // Constructor with all Order details
@@ -29,7 +30,8 @@ public class PostOrder extends EndpointSuper {
         Auth authentication = new Auth();
         requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
         addAdditionalRequestSpecs(requestSpec, constructRequestBody(crust, flavor, size, TableNumber));
-        postPayload("/api/orders");
+        url = "/api/orders";
+        postPayload();
         setAllSetters();
     }
     private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){

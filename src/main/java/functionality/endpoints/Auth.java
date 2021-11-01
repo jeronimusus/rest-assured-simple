@@ -12,7 +12,8 @@ public class Auth extends EndpointSuper {
         System.out.println("In Auth endpoint to get an access-token");
         requestSpec = buildEnv();
         addAdditionalRequestSpecs(requestSpec, constructRequestBody("test", "test"));
-        postPayload("/api/auth");
+        url = "/api/auth";
+        postPayload();
         setAccessToken();
     }
     private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){

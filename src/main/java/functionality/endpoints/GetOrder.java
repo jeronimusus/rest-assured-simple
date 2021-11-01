@@ -9,6 +9,7 @@ public class GetOrder extends EndpointSuper {
     public GetOrder() {
         System.out.println("In Get Order endpoint");
         requestSpec = buildEnv();
-        getPayload("/api/orders");
+        url = "/api/orders";
+        getPayload();
     }
 }

@@ -7,6 +7,7 @@ public class DeleteOrder extends EndpointSuper {
     public DeleteOrder(String orderId) {
         System.out.println("In Delete Order endpoint");
         requestSpec = buildEnv();
-        deletePayload("/api/orders/" + orderId);
+        url = "/api/orders/" + orderId;
+        deletePayload();
     }
 }

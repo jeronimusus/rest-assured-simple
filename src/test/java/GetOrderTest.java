@@ -10,5 +10,7 @@ public class GetOrderTest {
     public void getAnOrder(){
         GetOrder order = new GetOrder();
         order.writePayload();
+        System.out.println(order.getResponse().getStatusCode());
+        assertThat(200, equalTo(order.getResponse().getStatusCode()));
     }
 }

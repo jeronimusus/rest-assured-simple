@@ -4,6 +4,7 @@ import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.FileWriter;
@@ -17,10 +18,11 @@ public class EndpointSuper {
     private Response payload = null;
     private JsonPath payloadJson = null;
     private Boolean getCommonResponseSpec = false;
+    protected String url;
     // Following is used for Swagger validation
     private static final String AWS_SWAGGER_YAML = "pizza_swagger.yaml";
     private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(AWS_SWAGGER_YAML);;
-    public void getPayload(String url){
+    public void getPayload(){
         requestSpec.log().everything(false);
         payload  = given().
                         filter(validationFilter).
@@ -32,7 +34,7 @@ public class EndpointSuper {
         payloadJson = new JsonPath(payload.asString());
         runCommonResponseSpec();
     }
-    public void postPayload(String url){
+    public void postPayload(){
         payload = given().
                     filter(validationFilter).
                     filter(new AllureRestAssured()).
@@ -42,7 +44,7 @@ public class EndpointSuper {
                     post(url);
         payloadJson = new JsonPath(payload.asString());
     }
-    public void deletePayload(String url){
+    public void deletePayload(){
         payload = given().
                     filter(validationFilter).
                     filter(new AllureRestAssured()).
@@ -64,6 +66,10 @@ public class EndpointSuper {
             System.out.println("Verifying Common Response Spec");
             this.payload.then().spec(getCommonResponseSpec()); // validate against common expected response
         }
+    }
+    public void removeHeader(String headerName) {
+        FilterableRequestSpecification filterableRequestSpecification = (FilterableRequestSpecification) requestSpec;
+        filterableRequestSpecification.removeHeader(headerName);
     }
     public void writePayload() {
         try (FileWriter file = new FileWriter("/Users/tthjvx/Documents/Temp/restAssuredJsons/response_A.json")) {

@@ -1,3 +1,4 @@
+import functionality.endpoints.Auth;
 import functionality.endpoints.DeleteOrder;
 import functionality.endpoints.GetOrder;
 import functionality.endpoints.PostOrder;
@@ -34,5 +35,17 @@ public class PostOrderTest {
         // Now delete the order we just created to keep the DB tidy
         DeleteOrder orderToDelete = new DeleteOrder(String.valueOf(order.getOrderId()));
         orderToDelete.writePayload();
+    }
+    @Test
+    public void PostOrderWithMissingAuthHeader(){
+        PostOrder order = new PostOrder();
+        assertThat(201, equalTo(order.getResponse().getStatusCode()));
+        // Now delete the order we just created to keep the DB tidy
+        DeleteOrder orderToDelete = new DeleteOrder(String.valueOf(order.getOrderId()));
+        orderToDelete.writePayload();
+        // Remove the auth Header and Post the same payload again
+        order.removeHeader("Authorization");
+        order.postPayload();
+        assertThat(401, equalTo(order.getResponse().getStatusCode()));
     }
 }
