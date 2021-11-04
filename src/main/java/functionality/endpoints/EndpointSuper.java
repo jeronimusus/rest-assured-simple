@@ -68,6 +68,7 @@ public class EndpointSuper {
             this.payload.then().spec(getCommonResponseSpec()); // validate against common expected response
         }
     }
+    // Removes request Header headerName from the requestSpec
     public void removeHeader(String headerName) {
         FilterableRequestSpecification filterableRequestSpecification = (FilterableRequestSpecification) requestSpec;
         filterableRequestSpecification.removeHeader(headerName);

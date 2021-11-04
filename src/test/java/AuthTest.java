@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.matchesPattern;
 
 public class AuthTest {
     @Test
@@ -13,8 +14,9 @@ public class AuthTest {
         System.out.println(authentication.getAccessToken());
         authentication.writePayload();
         assertThat(200, equalTo(authentication.getResponse().getStatusCode()));
+        // Deserialize the response, and check that the access_token value matches the JWT Regex
         ResponseBody body = authentication.getResponse().getBody();
         AuthorisationSuccessResponse responseBody = body.as(AuthorisationSuccessResponse.class);
-        System.out.println(responseBody.access_token);
+        assertThat(responseBody.access_token, matchesPattern("^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*$"));
     }
 }
