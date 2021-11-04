@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GetOrderTest {
     @Test
     public void getAnOrder(){
-        GetOrder order = new GetOrder();
+        GetOrder order = new GetOrder(true);
         order.writePayload();
         System.out.println(order.getResponse().getStatusCode());
         assertThat(200, equalTo(order.getResponse().getStatusCode()));

@@ -22,6 +22,7 @@ public class EndpointSuper {
     // Following is used for Swagger validation
     private static final String AWS_SWAGGER_YAML = "pizza_swagger.yaml";
     private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(AWS_SWAGGER_YAML);;
+
     public void getPayload(){
         requestSpec.log().everything(false);
         payload  = given().

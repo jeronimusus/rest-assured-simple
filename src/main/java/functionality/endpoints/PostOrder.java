@@ -13,26 +13,30 @@ public class PostOrder extends EndpointSuper {
     private Integer tableNumber;
     private String timeStamp;
     // Empty Constructor, hardcoded order will be used
-    public PostOrder() {
+    public PostOrder(boolean doCall) {
         System.out.println("In Post Order endpoint with hardcoded order");
         requestSpec = buildEnv();
         Auth authentication = new Auth();
         requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
         addAdditionalRequestSpecs(requestSpec, constructRequestBody("crusty crust", "flavoursome flavour", "sizeable size", 5));
         url = "/api/orders";
-        postPayload();
-        setAllSetters();
+        if (doCall) {
+            postPayload();
+            setAllSetters();
+        }
     }
     // Constructor with all Order details
-    public PostOrder(String crust, String flavor, String size, int TableNumber) {
+    public PostOrder(boolean doCall, String crust, String flavor, String size, int TableNumber) {
         System.out.println("In Post Order endpoint with bespoke order details");
         requestSpec = buildEnv();
         Auth authentication = new Auth();
         requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
         addAdditionalRequestSpecs(requestSpec, constructRequestBody(crust, flavor, size, TableNumber));
         url = "/api/orders";
-        postPayload();
-        setAllSetters();
+        if (doCall) {
+            postPayload();
+            setAllSetters();
+        }
     }
     private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){
         requestSpec.

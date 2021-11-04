@@ -11,7 +11,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PostOrderTest {
     @Test
     public void postAnOrderWithNoDetails(){
-        PostOrder order = new PostOrder();
+        PostOrder order = new PostOrder(true);
+        assertThat(201, equalTo(order.getResponse().getStatusCode()));
         order.writePayload();
         System.out.println(order.getCrust());
         System.out.println(order.getFlavor());
@@ -20,32 +21,30 @@ public class PostOrderTest {
         System.out.println(order.getTableNumber());
         System.out.println(order.getTimeStamp());
         // Now delete the order we just created to keep the DB tidy
-        DeleteOrder orderToDelete = new DeleteOrder(String.valueOf(order.getOrderId()));
+        DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
         orderToDelete.writePayload();
     }
     @Test
     public void postAnOrderWithPizzaDetails(){
-        PostOrder order = new PostOrder("Cheesy", "Curry", "Medium", 5);
+        PostOrder order = new PostOrder(true, "Cheesy", "Curry", "Medium", 5325);
+        assertThat(201, equalTo(order.getResponse().getStatusCode()));
         order.writePayload();
         // Tests
-        assertThat("Cheesy", equalTo(order.getPayloadJson().get("Crust")));
-        assertThat("Curry", equalTo(order.getPayloadJson().get("Flavor")));
-        assertThat("Medium", equalTo(order.getPayloadJson().get("Size")));
-        assertThat(5, equalTo(order.getPayloadJson().get("Table_No")));
+        assertThat("Cheesy", equalTo(order.getCrust()));
+        assertThat("Curry", equalTo(order.getFlavor()));
+        assertThat("Medium", equalTo(order.getSize()));
+        assertThat(5325, equalTo(order.getTableNumber()));
         // Now delete the order we just created to keep the DB tidy
-        DeleteOrder orderToDelete = new DeleteOrder(String.valueOf(order.getOrderId()));
+        DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
         orderToDelete.writePayload();
     }
     @Test
     public void PostOrderWithMissingAuthHeader(){
-        PostOrder order = new PostOrder();
-        assertThat(201, equalTo(order.getResponse().getStatusCode()));
-        // Now delete the order we just created to keep the DB tidy
-        DeleteOrder orderToDelete = new DeleteOrder(String.valueOf(order.getOrderId()));
-        orderToDelete.writePayload();
+        // Set up the call, but don't POST, as we need to remove the Auth Header first
+        PostOrder order = new PostOrder(false);
         // Remove the auth Header and Post the same payload again
         order.removeHeader("Authorization");
-        order.postPayload();
+        order.postPayload(); // Now can POST as have removed Auth Header
         assertThat(401, equalTo(order.getResponse().getStatusCode()));
     }
 }
