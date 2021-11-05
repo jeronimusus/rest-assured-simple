@@ -4,6 +4,7 @@ import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.RequestSpecification;
 
@@ -16,6 +17,7 @@ import static io.restassured.RestAssured.given;
 public class EndpointSuper {
     protected RequestSpecification requestSpec;
     private Response payload = null;
+    private ResponseBody body = null;
     private JsonPath payloadJson = null;
     private Boolean getCommonResponseSpec = false;
     protected String url;
@@ -55,12 +57,13 @@ public class EndpointSuper {
                     delete(url);
         payloadJson = new JsonPath(payload.asString());
     }
-    public JsonPath getPayloadJson (){
+    public JsonPath getPayloadJson(){
         return this.payloadJson;
     }
-    public Response getResponse (){
+    public Response getResponse(){
         return this.payload;
     }
+    public ResponseBody getBody() { return this.payload.getBody(); }
     public void setGetCommonResponseSpec(boolean setTo) {getCommonResponseSpec = setTo;}
     private void runCommonResponseSpec() {
         if (getCommonResponseSpec) {

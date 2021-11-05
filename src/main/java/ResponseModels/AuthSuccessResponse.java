@@ -1,5 +1,5 @@
 package ResponseModels;
 
-public class AuthorisationSuccessResponse {
+public class AuthSuccessResponse {
     public String access_token;
 }

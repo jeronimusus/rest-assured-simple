@@ -1,6 +1,4 @@
-import functionality.endpoints.Auth;
 import functionality.endpoints.DeleteOrder;
-import functionality.endpoints.GetOrder;
 import functionality.endpoints.PostOrder;
 import org.junit.Test;
 
