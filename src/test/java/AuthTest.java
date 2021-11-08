@@ -1,4 +1,4 @@
-import ResponseModels.AuthSuccessResponse;
+import models.responseModels.AuthSuccessResponse;
 import functionality.endpoints.Auth;
 import org.junit.Test;
 

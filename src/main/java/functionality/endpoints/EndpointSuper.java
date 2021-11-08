@@ -42,7 +42,7 @@ public class EndpointSuper {
                     filter(validationFilter).
                     filter(new AllureRestAssured()).
                     spec(requestSpec).
-//                    log().all().
+                    log().all().
                 when().
                     post(url);
         payloadJson = new JsonPath(payload.asString());

@@ -1,6 +1,7 @@
 package functionality.endpoints;
 
 import io.restassured.specification.RequestSpecification;
+import models.requestModels.AuthRequestBody;
 import org.json.simple.JSONObject;
 
 import static functionality.SetupEnvironment.buildEnv;
@@ -16,17 +17,14 @@ public class Auth extends EndpointSuper {
         postPayload();
         setAccessToken();
     }
-    private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){
+    private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, AuthRequestBody requestBody){
         requestSpec.
                 body(requestBody);
         return requestSpec;
     }
-    @SuppressWarnings("unchecked") // else you get warning in the put's below
-    private static String constructRequestBody(String username, String password){
-        JSONObject credentials  = new JSONObject();
-        credentials.put("password", password);
-        credentials.put("username", username);
-        return credentials.toJSONString();
+    private static AuthRequestBody constructRequestBody(String username, String password){
+        AuthRequestBody body = new AuthRequestBody(password, username);
+        return body;
     }
     private void setAccessToken(){accessToken = getPayloadJson().get("access_token");}
     public String getAccessToken(){

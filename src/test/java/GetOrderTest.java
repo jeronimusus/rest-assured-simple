@@ -1,4 +1,4 @@
-import ResponseModels.IndividualOrder;
+import models.responseModels.IndividualOrder;
 import functionality.endpoints.GetOrders;
 import org.junit.Test;
 

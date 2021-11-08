@@ -1,6 +1,7 @@
 package functionality.endpoints;
 
 import io.restassured.specification.RequestSpecification;
+import models.requestModels.PostOrderRequestBody;
 import org.json.simple.JSONObject;
 
 import static functionality.SetupEnvironment.buildEnv;
@@ -38,19 +39,14 @@ public class PostOrder extends EndpointSuper {
             setAllSetters();
         }
     }
-    private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, String requestBody){
+    private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, PostOrderRequestBody requestBody){
         requestSpec.
                 body(requestBody);
         return requestSpec;
     }
-    @SuppressWarnings("unchecked") // else you get warning in the put's below
-    private static String constructRequestBody(String crust, String flavor, String size, int TableNumber){
-        JSONObject credentials  = new JSONObject();
-        credentials.put("Crust", crust);
-        credentials.put("Flavor", flavor);
-        credentials.put("Size", size);
-        credentials.put("Table_No", TableNumber);
-        return credentials.toJSONString();
+    private static PostOrderRequestBody constructRequestBody(String crust, String flavor, String size, int TableNumber){
+        PostOrderRequestBody body = new PostOrderRequestBody(crust, flavor, size, TableNumber);
+        return body;
     }
     // Getters and Setters
     private void setCrust(){crust = getPayloadJson().get("Crust");}

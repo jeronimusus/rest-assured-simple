@@ -1,4 +1,4 @@
-package ResponseModels;
+package models.responseModels;
 
 public class IndividualOrder {
     public String Crust;
