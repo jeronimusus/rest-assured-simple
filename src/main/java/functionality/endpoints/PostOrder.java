@@ -16,11 +16,7 @@ public class PostOrder extends EndpointSuper {
     // Empty Constructor, hardcoded order will be used
     public PostOrder(boolean doCall) {
         System.out.println("In Post Order endpoint with hardcoded order");
-        requestSpec = buildEnv();
-        Auth authentication = new Auth();
-        requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
-        addAdditionalRequestSpecs(requestSpec, constructRequestBody("crusty crust", "flavoursome flavour", "sizeable size", 5));
-        url = "/api/orders";
+        setupRequest("crusty crust", "flavoursome flavour", "sizeable size", 74362);
         if (doCall) {
             postPayload();
             setAllSetters();
@@ -29,24 +25,20 @@ public class PostOrder extends EndpointSuper {
     // Constructor with all Order details
     public PostOrder(boolean doCall, String crust, String flavor, String size, int TableNumber) {
         System.out.println("In Post Order endpoint with bespoke order details");
-        requestSpec = buildEnv();
-        Auth authentication = new Auth();
-        requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
-        addAdditionalRequestSpecs(requestSpec, constructRequestBody(crust, flavor, size, TableNumber));
-        url = "/api/orders";
+        setupRequest(crust, flavor, size, TableNumber);
         if (doCall) {
             postPayload();
             setAllSetters();
         }
     }
-    private static RequestSpecification addAdditionalRequestSpecs(RequestSpecification requestSpec, PostOrderRequestBody requestBody){
-        requestSpec.
-                body(requestBody);
-        return requestSpec;
-    }
-    private static PostOrderRequestBody constructRequestBody(String crust, String flavor, String size, int TableNumber){
+    // Sets up all that is needed for Rest Assured to make the call
+    private void setupRequest(String crust, String flavor, String size, int TableNumber){
+        requestSpec = buildEnv();
+        Auth authentication = new Auth();
+        requestSpec.header("Authorization", "Bearer " + authentication.getAccessToken());
         PostOrderRequestBody body = new PostOrderRequestBody(crust, flavor, size, TableNumber);
-        return body;
+        requestSpec.body(body);
+        url = "/api/orders";
     }
     // Getters and Setters
     private void setCrust(){crust = getPayloadJson().get("Crust");}
