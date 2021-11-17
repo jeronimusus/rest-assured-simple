@@ -1,0 +1,6 @@
+{
+  "detail": "Order for Table No. 3333 exists already ",
+  "status": 409,
+  "title": "Conflict",
+  "type": "about:blank"
+}

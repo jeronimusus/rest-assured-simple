@@ -1,6 +1,6 @@
 package models.responseModels;
 
-public class IndividualOrder {
+public class Order {
     public String Crust;
     public String Flavor;
     public Integer Order_ID;

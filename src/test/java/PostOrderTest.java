@@ -1,5 +1,8 @@
 import functionality.endpoints.DeleteOrder;
+import functionality.interfaces.IRestResponse;
 import functionality.endpoints.PostOrder;
+import functionality.interfaces.RestResponse;
+import models.responseModels.Order;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -8,10 +11,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PostOrderTest {
     @Test
+    public void getOrderWithGenericInterface() {
+        PostOrder order = new PostOrder(true);
+
+        IRestResponse<Order> intResponse = new RestResponse(Order.class, order.getResponse());
+        System.out.println(intResponse.getStatusCode());
+        System.out.println(intResponse.getBody().Timestamp);
+
+        // Now delete the order we just created to keep the DB tidy
+        DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
+        orderToDelete.writePayload();
+    }
+
+    @Test
     public void postAnOrderWithNoDetails(){
         PostOrder order = new PostOrder(true);
         assertThat(201, equalTo(order.getResponse().getStatusCode()));
         order.writePayload();
+        System.out.println("getClass result" + order.getClass());
         System.out.println(order.getCrust());
         System.out.println(order.getFlavor());
         System.out.println(order.getOrderId());
