@@ -1,7 +1,11 @@
 package functionality.endpoints;
 
+import functionality.interfaces.IRestResponse;
+import functionality.interfaces.RestResponse;
 import io.restassured.specification.RequestSpecification;
 import models.requestModels.PostOrderRequestBody;
+import models.responseModels.AuthSuccessResponse;
+import models.responseModels.Order;
 import org.json.simple.JSONObject;
 
 import static functionality.SetupEnvironment.buildEnv;
@@ -13,6 +17,7 @@ public class PostOrder extends EndpointSuper {
     private String size;
     private Integer tableNumber;
     private String timeStamp;
+    private IRestResponse<Order> intResponse;
     // Empty Constructor, hardcoded order will be used
     public PostOrder(boolean doCall) {
         System.out.println("In Post Order endpoint with hardcoded order");
@@ -63,6 +68,10 @@ public class PostOrder extends EndpointSuper {
     public String getTimeStamp(){
         return timeStamp;
     }
+    private void setPojoResponse(){
+        intResponse = new RestResponse<>(Order.class, getResponse());
+    }
+    public IRestResponse<Order> getPojoResponse() {return this.intResponse;}
     private void setAllSetters(){
         setCrust();
         setFlavor();
@@ -70,5 +79,6 @@ public class PostOrder extends EndpointSuper {
         setSize();
         setTableNumber();
         setTimeStamp();
+        setPojoResponse();
     }
 }

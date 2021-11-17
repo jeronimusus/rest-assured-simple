@@ -9,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
 
-public class GetOrderTest {
+public class GetOrdersTest {
 
     @Test
     public void getOrders(){
@@ -21,6 +21,13 @@ public class GetOrderTest {
         // Add all orders to an array of type Order
         Order[] moreAllOrders = orders.getBody().as(Order[].class);
         System.out.println("Array of type Order " + moreAllOrders[0].Flavor);
+        // Add all the individual Orders in to an Array of type IndividualOrder
+        // This is identical to the above in that uou wind up with an Array of Orders
+        Order[] arrayOfOrders = orders.getPayloadJson().getObject("", Order[].class);
+        for(Order order : arrayOfOrders)
+        {
+            System.out.println("Order Timestamp again " + order.Timestamp);
+        }
 
         // Add all order crusts to a List of type String
         List<String> crusts = orders.getPayloadJson().getList("Crust");
@@ -37,11 +44,6 @@ public class GetOrderTest {
             assertThat(order.Timestamp, matchesPattern("^^[1-9]\\d{3}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{6}$"));
         }
 
-        // Add all the individual Orders in to an Array of type IndividualOrder
-        Order[] arrayOfOrders = orders.getPayloadJson().getObject("", Order[].class);
-        for(Order order : arrayOfOrders)
-        {
-            System.out.println("Order Timestamp again " + order.Timestamp);
-        }
+
     }
 }

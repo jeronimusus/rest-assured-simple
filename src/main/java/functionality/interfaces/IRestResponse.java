@@ -4,7 +4,7 @@ import io.restassured.response.Response;
 
 // Generic Interface for all possible endpoint responses
 public interface IRestResponse<T> {
-    public T getBody();
+    public T getBodyAsPojo();
     public String getBodyAsString();
     public int getStatusCode();
     public boolean isSuccessful();

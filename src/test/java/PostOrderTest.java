@@ -1,8 +1,5 @@
 import functionality.endpoints.DeleteOrder;
-import functionality.interfaces.IRestResponse;
 import functionality.endpoints.PostOrder;
-import functionality.interfaces.RestResponse;
-import models.responseModels.Order;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -10,18 +7,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PostOrderTest {
-    @Test
-    public void getOrderWithGenericInterface() {
-        PostOrder order = new PostOrder(true);
-
-        IRestResponse<Order> intResponse = new RestResponse(Order.class, order.getResponse());
-        System.out.println(intResponse.getStatusCode());
-        System.out.println(intResponse.getBody().Timestamp);
-
-        // Now delete the order we just created to keep the DB tidy
-        DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
-        orderToDelete.writePayload();
-    }
 
     @Test
     public void postAnOrderWithNoDetails(){
@@ -35,6 +20,8 @@ public class PostOrderTest {
         System.out.println(order.getSize());
         System.out.println(order.getTableNumber());
         System.out.println(order.getTimeStamp());
+        System.out.println("Flavor from POJO: " + order.getPojoResponse().getBodyAsPojo().Flavor);
+
         // Now delete the order we just created to keep the DB tidy
         DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
         orderToDelete.writePayload();

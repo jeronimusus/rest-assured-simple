@@ -16,7 +16,7 @@ public class RestResponse<T> implements IRestResponse<T> {
             throw new RuntimeException("There should be a default constructor in the Response POJO");
         }
     }
-    public T getBody() {
+    public T getBodyAsPojo() {
         try {
             data = (T) response.getBody().as(data.getClass());
         } catch (Exception e) {

@@ -33,6 +33,7 @@ public class DeleteOrderTest {
         // Now delete the order we just created to keep the DB tidy
         DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));
         orderToDelete.writePayload();
+        System.out.println("Delete message from POJO: " + orderToDelete.getPojoResponse().getBodyAsPojo().message);
     }
 
     @Test

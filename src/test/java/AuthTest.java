@@ -16,5 +16,6 @@ public class AuthTest {
         // Deserialize the response, and check that the access_token value matches the JWT Regex
         AuthSuccessResponse responseBody = authentication.getBody().as(AuthSuccessResponse.class);
         assertThat(responseBody.access_token, matchesPattern("^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.?[A-Za-z0-9-_.+/=]*$"));
+        System.out.println("Access Token from POJO: " + authentication.getPojoResponse().getBodyAsPojo().access_token);
     }
 }
