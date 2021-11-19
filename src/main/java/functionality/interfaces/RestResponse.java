@@ -24,6 +24,7 @@ public class RestResponse<T> implements IRestResponse<T> {
         }
         return data;
     }
+    // The below or not really needed as EndpointSuper has the same methods
     public String getBodyAsString() {
         return response.getBody().asString();
     }

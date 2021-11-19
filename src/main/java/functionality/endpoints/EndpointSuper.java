@@ -27,6 +27,7 @@ public class EndpointSuper {
 
     public void getPayload(){
         requestSpec.log().everything(false);
+        requestSpec.log().ifValidationFails();
         payload  = given().
                         filter(validationFilter).
                         filter(new AllureRestAssured()).
@@ -48,6 +49,7 @@ public class EndpointSuper {
         payloadJson = new JsonPath(payload.asString());
     }
     public void deletePayload(){
+        requestSpec.log().headers();
         payload = given().
                     filter(validationFilter).
                     filter(new AllureRestAssured()).

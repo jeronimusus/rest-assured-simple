@@ -152,5 +152,31 @@ paths:
       responses:
         200:
           description: Successfully deleted an order
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Order deleted success message
+        404:
+          description: Order not found to delete
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    description: Contains Order ID that was not found
+                  status:
+                    type: integer
+                    description: HTTP Status, will be 404
+                  title:
+                    type: string
+                    description: Title of the the 404
+                  type:
+                    type: string
+                    description: type
 components: {}
