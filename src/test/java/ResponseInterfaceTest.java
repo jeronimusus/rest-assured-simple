@@ -15,7 +15,7 @@ public class ResponseInterfaceTest {
 
         // Declare IRestResponse as type Order and instantiate with the RestResponse interface
         IRestResponse<Order> intResponse = new RestResponse(Order.class, order.getResponse());
-        System.out.println("Order timestamp: " + intResponse.getBodyAsPojo().Timestamp);
+        System.out.println("Order timestamp: " + intResponse.getBodyAsPojo().timestamp);
         System.out.println("Status Code: " + intResponse.getStatusCode());
         System.out.println("Status Code description: " + intResponse.getStatusDescription());
         System.out.println("Got a success response code: " + intResponse.isSuccessful());

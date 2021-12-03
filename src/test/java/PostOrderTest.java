@@ -20,7 +20,7 @@ public class PostOrderTest {
         System.out.println(order.getSize());
         System.out.println(order.getTableNumber());
         System.out.println(order.getTimeStamp());
-        System.out.println("Flavor from POJO: " + order.getPojoResponse().getBodyAsPojo().Flavor);
+        System.out.println("Flavor from POJO: " + order.getPojoResponse().getBodyAsPojo().flavor);
 
         // Now delete the order we just created to keep the DB tidy
         DeleteOrder orderToDelete = new DeleteOrder(true, String.valueOf(order.getOrderId()));

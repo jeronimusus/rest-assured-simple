@@ -4,9 +4,6 @@ import dataProvider.ConfigFileReader;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static io.restassured.RestAssured.config;
 import static io.restassured.config.EncoderConfig.encoderConfig;
 

@@ -5,11 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static functionality.endpoints.GenericMethodTest.printList;
 import static functionality.endpoints.GenericMethodTest.printSquare;
 
 public class DeleteOrderTest {
+
+    @Test
+    public void hackerRank() {
+    }
     @Test
     public void deleteAnOrderTest(){
         // First create an Order to delete
@@ -49,4 +54,6 @@ public class DeleteOrderTest {
         printSquare(ints);
 
     }
+
+
 }

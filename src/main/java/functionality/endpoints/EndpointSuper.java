@@ -25,6 +25,7 @@ public class EndpointSuper {
     private static final String AWS_SWAGGER_YAML = "pizza_swagger.yaml";
     private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(AWS_SWAGGER_YAML);;
 
+    // TODO: 19/11/2021 make these three into one method passing the verb as an Enum
     public void getPayload(){
         requestSpec.log().everything(false);
         requestSpec.log().ifValidationFails();
@@ -51,14 +52,15 @@ public class EndpointSuper {
     public void deletePayload(){
         requestSpec.log().headers();
         payload = given().
-                    filter(validationFilter).
-                    filter(new AllureRestAssured()).
-                    spec(requestSpec).
+                filter(validationFilter).
+                filter(new AllureRestAssured()).
+                spec(requestSpec).
 //                    log().all().
-                when().
-                    delete(url);
+        when().
+                delete(url);
         payloadJson = new JsonPath(payload.asString());
     }
+
     public JsonPath getPayloadJson(){
         return this.payloadJson;
     }
@@ -78,6 +80,7 @@ public class EndpointSuper {
         FilterableRequestSpecification filterableRequestSpecification = (FilterableRequestSpecification) requestSpec;
         filterableRequestSpecification.removeHeader(headerName);
     }
+
     public void writePayload() {
         try (FileWriter file = new FileWriter("/Users/tthjvx/Documents/Temp/restAssuredJsons/response_A.json")) {
             file.write(payloadJson.prettyPrint());
