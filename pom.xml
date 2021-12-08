@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
-    <artifactId>RestAssuredTUI</artifactId>
+    <artifactId>RestAssuredSimple</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>Automating the Order Pizza API</description>
     <properties>
@@ -133,6 +133,10 @@
                             <name>allure.results.directory</name>
                             <value>/Users/tthjvx/.jenkins/workspace/Pizza Rest Assured/allure-results</value>
                         </property>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>/Users/tthjvx/.jenkins/workspace/hello_world_pipeline/allure-results</value>
+                        </property>
                     </systemProperties>
                 </configuration>
                 <dependencies>
@@ -149,6 +153,8 @@
                 <version>${allure.maven.version}</version>
                 <configuration>
                     <reportVersion>2.4.1</reportVersion>
+<!--                    <resultsDirectory>/Users/tthjvx/.jenkins/workspace/hello_world_pipeline/allure-results</resultsDirectory>-->
+<!--                    <reportDirectory>/Users/tthjvx/.jenkins/workspace/hello_world_pipeline/allure-reports</reportDirectory>-->
                 </configuration>
             </plugin>
         </plugins>
