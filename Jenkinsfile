@@ -8,6 +8,15 @@ pipeline {
         description: 'Is it the debug build?')
     }
     stages {
+        // stage("First Stage") {
+        //     steps {
+        //         sleep 5 // 10 seconds
+        //         echo 'step 1, Hello World echo'
+        //         script {
+        //             sh "docker run hello_world_ruby_executes"
+        //         }
+        //     }
+        // }
         stage("Second Stage") {
             steps {
                 echo 'Step2, second time Hello World'
@@ -26,11 +35,23 @@ pipeline {
                 }
             }
         }
-
+        stage('reports') {
+            steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'allure-results']]
+                    ])
+                }
+            }
+        }
     }
     post {
         success {
-            echo 'The build was a success us a Jenkinsfile'
+            echo 'The build was a success'
         }
     }
 }
