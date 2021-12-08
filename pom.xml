@@ -137,6 +137,10 @@
                             <name>allure.results.directory</name>
                             <value>/Users/tthjvx/.jenkins/workspace/hello_world_pipeline/allure-results</value>
                         </property>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>/Users/tthjvx/.jenkins/workspace/hello_world_pipeline_from_SCM/allure-results</value>
+                        </property>
                     </systemProperties>
                 </configuration>
                 <dependencies>
