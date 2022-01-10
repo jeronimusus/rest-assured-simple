@@ -39,21 +39,4 @@ public class DeleteOrderTest {
         ints.add("3");
         printList(ints);
     }
-    @Test
-    public void typeWildcardTest() {
-        List<Double> doubles = new ArrayList<Double>();
-        doubles.add(1.0);
-        doubles.add(2.0);
-        doubles.add(3.0);
-        printSquare(doubles);
-
-        List<Integer> ints = new ArrayList<Integer>();
-        ints.add(1);
-        ints.add(2);
-        ints.add(3);
-        printSquare(ints);
-
-    }
-
-
 }
